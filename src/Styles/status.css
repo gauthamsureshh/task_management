@@ -1,0 +1,15 @@
+#ff{
+    background-color: #fcfcfb;
+    padding-top: 1.2rem;
+    height: 100vh;
+}
+
+#total-tasks{
+    background-color: #4cb4c7;
+}
+#tasks-completed{
+    background-color: #7abecc;
+}
+#tasks-pending{
+    background-color: #7CD1C0;
+}

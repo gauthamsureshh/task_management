@@ -1,15 +1,15 @@
-body,
-		html {
-			margin: 0;
-			padding: 0;
-			height: 100%;
-			background: #7abecc !important;
-		}
-		.user_card {
+body {
+	background-image: url('https://i.pinimg.com/736x/6d/a9/f7/6da9f783d51f856361fde77593069001.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}
+.user_card {
 			width: 350px;
 			margin-top: auto;
 			margin-bottom: auto;
-			background: #74cfbf;
+			background: #333a388a;
 			position: relative;
 			display: flex;
 			justify-content: center;
@@ -27,7 +27,7 @@ body,
 		}
 
 		#form-title{
-			color: #fff;
+			color: #b62525;
 			
 		}
 
@@ -44,7 +44,7 @@ body,
 			padding: 0 2rem;
 		}
 		.input-group-text {
-			background: #f7ba5b !important;
+			background: #0e0e0e !important;
 			color: white !important;
 			border: 0 !important;
 			border-radius: 0.25rem 0 0 0.25rem !important;

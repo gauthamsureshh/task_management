@@ -2,6 +2,10 @@ import React,{useState} from "react";
 import "../Styles/register.css"
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import toastr from 'toastr';
+import 'toastr/build/toastr.min.css';
+import NavBar from "./navBar";
+
 
 function RegisterPage(){
 	const [username,setUserName]=useState('')
@@ -10,6 +14,7 @@ function RegisterPage(){
 	const [passwordConf,setPasswordConf]=useState('')
 	const [errormsg,setErrormsg]=useState({})
 	const navigate=useNavigate()
+	
 
 	function registerUser(event){
 		event.preventDefault();
@@ -21,6 +26,7 @@ function RegisterPage(){
 		}
 		axios.post('http://127.0.0.1:8000/register',user).then(response=>{
 			setErrormsg('')
+			toastr.success("Account Created Successgully..!")
 			navigate('/')
 		}).catch(error=>{
 			console.log(`Error is ${error}`)
@@ -34,6 +40,8 @@ function RegisterPage(){
 	}
 	
     return(
+	<>
+	<NavBar/>
 	<div className="container h-100">
 		<div className="d-flex justify-content-center h-100">
 			<div className="user_card">
@@ -83,6 +91,7 @@ function RegisterPage(){
 			</div>
 		</div>
 	</div>
+	</>
     )
 }
 
