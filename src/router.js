@@ -5,6 +5,7 @@ import RegisterPage from "./Components/registerPage";
 import Createtask from "./Components/createTask";
 import Assigntask from "./Components/assignTask";
 import Dashboard from "./Components/dashboard";
+import Edittask from "./Components/editTask";
 
 const router=createBrowserRouter([
     {path:'',element:<App/>},
@@ -12,7 +13,8 @@ const router=createBrowserRouter([
     {path:'/register',element:<RegisterPage/>},
     {path:'/dashboard',element:<Dashboard/>},
     {path:'/createtask',element:<Createtask/>},
-    {path:'/assigntask',element:<Assigntask/>}
+    {path:'/assigntask',element:<Assigntask/>},
+    {path:'/edittask/:taskid',element:<Edittask/>}
 ]);
 
 export default router;

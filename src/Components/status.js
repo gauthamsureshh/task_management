@@ -1,20 +1,40 @@
 import React, { useEffect, useState } from "react";
 import "../Styles/status.css";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import axios from 'axios';
 import {useSelector} from 'react-redux';
+import toastr from 'toastr';
+import 'toastr/build/toastr.min.css';
 
 function Status(){
     const user=useSelector(store=>store.auth.user);
     const[task,setTask]=useState([]);
+    const[data,setData]=useState([]);
+    const navigate=useNavigate()
+    
     function getTask(){
-        axios.get(`http://127.0.0.1:8000/listtask/${user.id}`).then(response=>{
-            setTask(response.data)
-        })            
+        axios.get(`http://127.0.0.1:8000/listtask/${2}`).then(response=>{
+            const data=response.data;
+            setData(data)
+            setTask(data.tasks);
+        })        
     }
     useEffect(()=>{
         getTask();
     },[])
+
+    const handleDelete=(taskid)=>{
+        const confirm=window.confirm('Are you sure you want to delete this item?');
+        if(confirm){
+            axios.delete(`http://127.0.0.1:8000/deletetask/${taskid}`).then(response=>{
+                toastr.error('Task Deleted')
+            })
+        }
+    }
+    
+    const handleEdit=(taskid)=>{
+        navigate(`/edittask/${taskid}`)
+    }
     
     return(
         
@@ -28,7 +48,7 @@ function Status(){
                             <h5 className="card-title">Total Tasks</h5>
                         </div>
                         <div className="card-body">
-                            <h3 className="card-title">4</h3>
+                            <h3 className="card-title">{data.total_task}</h3>
                         </div>
                     </div>
                 </div>
@@ -40,7 +60,7 @@ function Status(){
                             <h5 className="card-title">Tasks Completed</h5>
                         </div>
                         <div className="card-body">
-                            <h3 className="card-title">4</h3>
+                            <h3 className="card-title">{data.completed_task}</h3>
                         </div>
                     </div>
                 </div>
@@ -49,10 +69,10 @@ function Status(){
                 <div className="col-md">
                     <div className="card text-center text-white mb-3" id="tasks-pending">
                         <div className="card-header">
-                            <h5 className="card-title">Tasks Pending</h5>
+                            <h5 className="card-title">Tasks In Progress</h5>
                         </div>
                         <div className="card-body">
-                            <h3 className="card-title">6</h3>
+                            <h3 className="card-title">{data.in_progress}</h3>
                         </div>
                     </div>
                 </div>
@@ -81,6 +101,7 @@ function Status(){
                             <th>Due Date</th>
                             <th>Status</th>
                             <th>Update</th>
+                            <th>Delete</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -92,7 +113,10 @@ function Status(){
                                 <td>{tasks.due_date}</td>
                                 <td>{tasks.status}</td>
                                 <td>
-                                    <button className="btn btn-secondary" >Edit</button>
+                                    <button className="btn btn-warning btn-sm" onClick={()=>handleEdit(tasks.id)} >Edit</button>
+                                </td>
+                                <td>
+                                    <button className="btn btn-danger btn-sm" onClick={()=>handleDelete(tasks.id)}>Delete</button>
                                 </td>
                             </tr>
                         ))}

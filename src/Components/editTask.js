@@ -1,38 +1,43 @@
-import React,{useState} from "react";
+import React,{useEffect, useState} from "react";
 import axios from 'axios';
-import { Link,useNavigate } from "react-router-dom";
+import { Link,useNavigate,useParams } from "react-router-dom";
 import toastr from 'toastr';
 import 'toastr/build/toastr.min.css';
-import "../Styles/createTask.css";
 
-function Createtask(){
+function Edittask(){
+    const {taskid}=useParams()
     const navigate=useNavigate();
     const[title,setTile]=useState('');
     const[description,setDescription]=useState('');
     const[duedate,setDueDate]=useState('');
     const[status,setStatus]=useState('');
-
-    function handleSubmit(){
+    useEffect(()=>{
+        axios.get(`http://127.0.0.1:8000/edittask/${taskid}`).then(response=>{
+            setTile(response.data.title)
+            setDescription(response.data.description)
+            setDueDate(response.data.due_date)
+            setStatus(response.data.status)
+        })
+    },[taskid])
+    function editTask(){
         const data={
             title:title,
             description:description,
             due_date:duedate,
             status:status
         }
-        axios.post('http://127.0.0.1:8000/createtask',data).then(response=>{
-            toastr.success("New Task Added")
-            navigate('/dashboard')
+        axios.put(`http://127.0.0.1:8000/edittask/${taskid}`,data).then(response=>{
+            toastr.success("Task Editted Successfully")
         })
+        navigate('/dashboard')
     }
 
-    const handleStatusChange=(event)=>{
-        setStatus(event.target.value);
-    }
+
     return(
         <div className="container-fluid">
             <div className="row">
                 <div className="col-8 offset-2">
-                    <h1 className="text-center" style={{color:'rgb(221, 130, 54)'}}>CREATE TASK</h1>
+                    <h1 className="text-center" style={{color:'rgb(221, 130, 54)'}}>EDIT TASK</h1>
                     <div className="form-group">
                         <label className="addtask-label">Title</label>
                         <input 
@@ -75,7 +80,7 @@ function Createtask(){
                     </div>
                     <div className="form-group">
                         <Link to={'/dashboard'} className="btn btn-info">Back</Link>
-                        <button className="btn btn-success" onClick={handleSubmit}>Create Task</button>
+                        <button className="btn btn-success" onClick={editTask}>Submit</button>
                     </div>
                 </div>
             </div>
@@ -83,4 +88,4 @@ function Createtask(){
     )
 }
 
-export default Createtask;
+export default Edittask;

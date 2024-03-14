@@ -15,7 +15,6 @@ function LoginPage(){
 	const [errormsg,setErrormsg]=useState('')
 	const navigate=useNavigate();
 	const dispatch=useDispatch();
-
 	function loginUser(event){
 		event.preventDefault();
 		const user={
@@ -33,7 +32,16 @@ function LoginPage(){
 			toastr.success('Logged Successfully')
 		navigate('/dashboard')
 		}).catch(error=>{
-			console.log(error)
+			console.log(`Error is ${error.response.data.error}`)
+			if(error.response.data.error){
+				setErrormsg(Object.values(error.response.data.error).join(''))
+			}
+			else if(error.response.data.message){
+				setErrormsg(error.response.data.message)
+			}
+			else{
+				setErrormsg("Login Failed. Please Contact Admin")
+			}
 		})
 	}
     return(
@@ -45,19 +53,21 @@ function LoginPage(){
                     <div className="d-flex justify-content-center">
                         <h3 id="form-title">LOGIN</h3>
                     </div>
+					{errormsg?<div className="alert alert-danger">{errormsg}</div>:''}
 				<div className="d-flex justify-content-center form_container">
+					
 					<form onSubmit={loginUser}>
 						<div className="input-group mb-3">
 							<div className="input-group-append">
 								<span className="input-group-text"><i className="fas fa-user"></i></span>
 							</div>
-							<input type="text" name="username" placeholder="Username" className="form-control" value={username} onInput={(event)=>setUsername(event.target.value)} required="required" />
+							<input type="text" name="username" placeholder="Username" className="form-control" value={username} onInput={(event)=>setUsername(event.target.value)}  />
 						</div>
 						<div className="input-group mb-2">
 							<div className="input-group-append">
 								<span className="input-group-text"><i className="fas fa-key"></i></span>
 							</div>
-								<input type="password" name="password" placeholder="Password" className="form-control" value={password} onInput={(event)=>setPassword(event.target.value)} required="required" />
+								<input type="password" name="password" placeholder="Password" className="form-control" value={password} onInput={(event)=>setPassword(event.target.value)} />
 						</div>
 						<div className="d-flex justify-content-center mt-3 login_container">
                             <input className="btn login_btn" type="submit" value="Login" />

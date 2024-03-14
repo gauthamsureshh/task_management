@@ -12,7 +12,7 @@ function NavBar() {
     const navigate=useNavigate()
     function logout(){
         if(user){
-            axios.post('url',{},{
+            axios.post('http://127.0.0.1:8000/logout',{},{
                 headers:{'Authorization':'Bearer'+user.token}
             })
             toastr.error('Logged Out')
