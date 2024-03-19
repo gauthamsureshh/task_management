@@ -2,9 +2,10 @@ import React from "react";
 import { NavLink,useNavigate } from "react-router-dom";
 import {useSelector, useDispatch} from 'react-redux';
 import toastr from 'toastr';
-import 'toastr/build/toastr.min.css';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from 'axios';
 import { removeUser } from "../store/authSlice";
+import { faRightToBracket } from "@fortawesome/free-solid-svg-icons";
 
 function NavBar() {   
     const user=useSelector(store=>store.auth.user);
@@ -56,7 +57,7 @@ function NavBar() {
                         <>
                         <li className="nav-item">Welcome,{user.username}</li>
                         <span>
-                        <li className="nav-item  btn btn-sm" style={{color:'white'}} onClick={logout} >Logout</li>
+                        <li className="nav-item  btn btn-sm" style={{color:'white'}} onClick={logout} > <FontAwesomeIcon icon={ faRightToBracket} /> </li>
                         </span>
                         </>
                         ) : (
@@ -67,5 +68,8 @@ function NavBar() {
         </nav>
     );
 }
+
+
+
 
 export default NavBar;

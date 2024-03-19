@@ -6,12 +6,8 @@ import checkAuth from "../auth/checkAuth";
 function Dashboard(){
     return(
         <>
-            
-           
             <NavBar/>
             <Status/>
-            
-            
         </>
     )
 }

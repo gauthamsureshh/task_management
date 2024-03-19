@@ -13,7 +13,7 @@ function Status(){
     const navigate=useNavigate()
     
     function getTask(){
-        axios.get(`http://127.0.0.1:8000/listtask/${2}`).then(response=>{
+        axios.get(`http://127.0.0.1:8000/listtask/${user.id}`).then(response=>{
             const data=response.data;
             setData(data)
             setTask(data.tasks);
@@ -113,10 +113,10 @@ function Status(){
                                 <td>{tasks.due_date}</td>
                                 <td>{tasks.status}</td>
                                 <td>
-                                    <button className="btn btn-warning btn-sm" onClick={()=>handleEdit(tasks.id)} >Edit</button>
+                                    <button className="btn  btn-sm" onClick={()=>handleEdit(tasks.id)} ><img src="https://cdn-icons-png.flaticon.com/512/9424/9424666.png" height={"25px"}></img></button>
                                 </td>
                                 <td>
-                                    <button className="btn btn-danger btn-sm" onClick={()=>handleDelete(tasks.id)}>Delete</button>
+                                    <button className="btn  btn-sm" onClick={()=>handleDelete(tasks.id)}><img src="https://cdn-icons-png.flaticon.com/512/484/484611.png" height={"25px"}></img></button>
                                 </td>
                             </tr>
                         ))}
