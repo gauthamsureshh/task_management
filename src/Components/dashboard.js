@@ -3,6 +3,7 @@ import NavBar from "./navBar";
 import Status from "./status";
 import checkAuth from "../auth/checkAuth";
 
+
 function Dashboard(){
     return(
         <>

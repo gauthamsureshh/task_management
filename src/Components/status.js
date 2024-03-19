@@ -82,7 +82,7 @@ function Status(){
         <h4> MANAGE TASKS</h4>
                 <hr/>
             <div className="col">
-                <Link to={'/createtask'} className="btn btn-sm btn-outline-secondary btn-block">Create Tasks</Link>
+                <Link to={'/createtask'} className="btn btn-sm btn-outline-primary btn-block">Create Tasks</Link>
             </div>
             <div className="col">
             <Link to={'/assigntask'} className="btn btn-sm btn-outline-info btn-block">Assign Tasks</Link>

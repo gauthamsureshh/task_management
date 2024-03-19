@@ -8,13 +8,13 @@ function HomePage() {
     return (
         <div class="container-fluid homepage">
         <div class="card homeCard">
-            <h1>Welcome to TaskTerra</h1>
+            <h1>TASK TERRA</h1>
             {user ?(
                 <div class="buttons">
                 <h6>Go to DashBoard,<Link to={'/dashboard'}>Continue</Link></h6>
             </div>
             ):(
-                <h6>Let's Get Started,<Link to={'/login'} >Login</Link></h6>
+                <h5>Let's Get Started,<Link to={'/login'} >Login</Link></h5>
             )}
             
             

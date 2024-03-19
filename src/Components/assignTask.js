@@ -72,9 +72,9 @@ function Assigntask(){
                     </div>
                     <div className="form-group">
                     {selectedUser && selectedTask && (
-                        <h6>
+                        <h5>
                             You want to assign <strong>{users.find(user => user.id === parseInt(selectedUser)).username}</strong> to a task <strong>{task.find(task => task.id === parseInt(selectedTask)).title}</strong>.
-                        </h6>
+                        </h5>
                     )}
                     </div>
                     <div className="form-group">
