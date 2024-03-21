@@ -46,6 +46,7 @@ function Edittask(){
                         className="form-control" 
                         onChange={(event)=>{setTile(event.target.value)}}
                         placeholder="Enter Title"
+                        readOnly
                         />
                     </div>
                     <div className="form-group">
@@ -56,6 +57,7 @@ function Edittask(){
                         className="form-control" 
                         onChange={(event)=>{setDescription(event.target.value)}}
                         placeholder="Description"
+                        readOnly
                         />
                     </div>
                     <div className="form-group">
